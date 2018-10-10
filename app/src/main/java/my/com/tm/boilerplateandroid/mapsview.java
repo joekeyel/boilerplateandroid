@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,25 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        myView = inflater.inflate(R.layout.mapspage, container, false);
+
+
+
+                myView = inflater.inflate(R.layout.mapspage, container, false);
+
+                MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map);
+
+                mapFragment.getMapAsync(this);
+
+
+
+
+
+
+
+
+
+
+
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -62,9 +81,6 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
 //        back = (Button) myView.findViewById(R.id.back);
 //        back.setOnClickListener(this);
 
-        MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(this);
 
         return myView;
     }
@@ -242,4 +258,7 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
             return true;
         }
     }
+
+
+
 }
