@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:background="@mipmap/bir"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="my.com.tm.idecomm.LoginActivity">
+    tools:context="my.com.tm.boilerplateandroid.LoginActivity">
 
     <TextView
         android:id="@+id/textView"
