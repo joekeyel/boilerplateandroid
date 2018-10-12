@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.my_maps:
-
+                if(fragment == null)
                fragment = new mapsview();
                 break;
 

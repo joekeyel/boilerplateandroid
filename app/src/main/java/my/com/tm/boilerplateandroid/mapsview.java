@@ -46,7 +46,7 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
     LocationRequest mLocationRequest;
     MarkerOptions tagmylocation;
     Marker deletemarker;
-
+    private SupportMapFragment mapFragment;
 
     View myView;
     private String JSON_STRING;
@@ -55,14 +55,35 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
 
-
                 myView = inflater.inflate(R.layout.mapspage, container, false);
 
-                MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            mapFragment.getMapAsync(new OnMapReadyCallback() {
+                @Override
+                public void onMapReady(GoogleMap googleMap) {
 
-                mapFragment.getMapAsync(this);
+                    mMap = googleMap;
+                    mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
+                    //Initialize Google Play Services
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(getContext(),
+                                Manifest.permission.ACCESS_FINE_LOCATION)
+                                == PackageManager.PERMISSION_GRANTED) {
+                            buildGoogleApiClient();
+                            mMap.setMyLocationEnabled(true);
+                        }
+                    } else {
+                        buildGoogleApiClient();
+                        mMap.setMyLocationEnabled(true);
+                    }
+                }
+            });
+        }
 
+        // R.id.map is a FrameLayout, not a Fragment
+        getChildFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
 
 
 
@@ -127,21 +148,7 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
     public void onMapReady(GoogleMap googleMap) {
 
 
-        mMap = googleMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-        //Initialize Google Play Services
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ContextCompat.checkSelfPermission(getContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION)
-                    == PackageManager.PERMISSION_GRANTED) {
-                buildGoogleApiClient();
-                mMap.setMyLocationEnabled(true);
-            }
-        } else {
-            buildGoogleApiClient();
-            mMap.setMyLocationEnabled(true);
-        }
 
         //put marker of other mobile on the map when map is ready
 
@@ -259,6 +266,14 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
         }
     }
 
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        MapFragment mapFragment = (MapFragment) getActivity().getFragmentManager().findFragmentById(R.id.map);
+//        if (mapFragment != null)
+//            getActivity().getFragmentManager().beginTransaction()
+//                    .remove(mapFragment).commit();
+//    }
 
 
 }
