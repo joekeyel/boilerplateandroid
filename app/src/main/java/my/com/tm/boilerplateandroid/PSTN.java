@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -59,6 +63,7 @@ public class PSTN extends Fragment implements View.OnClickListener  {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.pstn_sites, container, false);
 
+        setHasOptionsMenu(true);
         Calendar calendar = Calendar.getInstance();
         String currentDate = DateFormat.getDateInstance(DateFormat.FULL).format(calendar.getTime());
 
@@ -106,6 +111,8 @@ public class PSTN extends Fragment implements View.OnClickListener  {
 
 
         Log.d(TAG, "Refreshed token: " + refreshedToken);
+
+
 
 
         return myView;
@@ -162,4 +169,39 @@ public class PSTN extends Fragment implements View.OnClickListener  {
 
 
     }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.notification_action);
+        menuItem.setIcon(Converter.convertLayoutToImage(getActivity(),2,R.drawable.notification_icon));
+
+
+        MenuItem menuItem2 = menu.findItem(R.id.cart_action);
+        menuItem2.setIcon(Converter.convertLayoutToImage(getActivity(),2,R.drawable.shopchart_icon));
+
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        // TODO Add your menu entries here
+//        super.onCreateOptionsMenu(menu, inflater);
+//    }
 }

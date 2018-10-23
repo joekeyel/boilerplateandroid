@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -38,7 +39,7 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
     //for googlemapview
 
     private GoogleMap mMap;
-
+    Button startb,stopb;
 
     GoogleApiClient mGoogleApiClient;
     Location mLastLocation;
@@ -88,7 +89,17 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
 
 
 
+         startb = myView.findViewById(R.id.startlocation);
 
+         startb.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+
+
+
+
+             }
+         });
 
 
 
@@ -101,6 +112,8 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
 
 //        back = (Button) myView.findViewById(R.id.back);
 //        back.setOnClickListener(this);
+
+
 
 
         return myView;
@@ -210,6 +223,7 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
 
+        Toast.makeText(getActivity(), location.getLatitude() + "," + location.getLongitude(), Toast.LENGTH_SHORT).show();
 
 
 
@@ -218,9 +232,13 @@ public class mapsview extends Fragment implements View.OnClickListener,OnMapRead
 //        Toast.makeText(MyActivity.this, "Accuracy is "+String.valueOf(accuracy), Toast.LENGTH_LONG)
 //                .show();
         //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
-        }
+//        if (mGoogleApiClient != null) {
+//            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+//        }
+
+
+
+
     }
 
 

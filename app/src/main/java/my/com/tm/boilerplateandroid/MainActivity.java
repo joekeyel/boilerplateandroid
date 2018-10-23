@@ -30,16 +30,6 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
-//        final ActionBar ab = getSupportActionBar();
-//        if (ab != null) {
-//            ab.setLogo(R.mipmap.tm);
-//            ab.setTitle("MukilFM");
-//            ab.setHomeAsUpIndicator(R.mipmap.tm);
-//            ab.setDisplayHomeAsUpEnabled(true);
-
-
-            // MyView is my current Activity, and AlarmReceiver is the
-            // BoradCastReceiver
 
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
             ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,12 +77,6 @@ public class MainActivity extends AppCompatActivity
                 if(fragment == null)
                fragment = new mapsview();
                 break;
-
-            /*     fragment = new Bank();
-                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                startActivity(new Intent(NavigationActivity.this, Bank.class));
-                drawer.closeDrawers();
-                break;*/
 
             case R.id.nav_logout:
 
@@ -151,4 +135,6 @@ public class MainActivity extends AppCompatActivity
 
         return true;
     }
+
+
 }
